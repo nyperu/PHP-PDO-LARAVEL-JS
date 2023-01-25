@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img id="logo" src="1.png" alt=""  title="1">
+    <button onclick="resmiDegistir()"> Resmi Değiştir</button>
+   
+    <p>Bugün güzel yemeklerden bir menü hazırladık.</p>
+    <script>
+        var a=0;
+            function resmiDegistir(){
+                if(a==0){
+                    var logo=document.getElementById("logo");
+                    logo.title="2";
+                    logo.src="2.png";
+                    a++;
+                }
+                else{
+                    var logo=document.getElementById("logo");
+                    logo.title="1";
+                    logo.src="1.png";
+                    a--;
+                }
+                
+             }
+    
+        for(var i=0; i<100;i++){
+                document.write("<h5 style=\"margin-left:40%\">a</h5>")
+            }
+        function saatGoster(){
+
+            var tarih=new Date();
+            var saat=tarih.getHours();
+            var dakika=tarih.getMinutes();
+            var saniye=tarih.getSeconds();
+            
+            for(var i=0; document.getElementsByTagName("h5").length;i++){
+                document.getElementsByTagName("h5")[i].innerHTML=saat+":"+dakika+":"+saniye;
+                
+            }
+
+        }
+        setInterval(saatGoster,10);
+        /* var isim="kaan";
+        var yas=25;
+        var gozRengi="Mavi";
+        var insan1={
+            isim: "Fatih",
+            yas:28,
+            gozRengi:"Ela"
+        };
+
+        document.write(isim+" "+yas+" "+gozRengi+" <br>");
+        document.write(insan1.isim+" "+insan1.yas+" "+insan1.gozRengi.length+"<br> ");
+        function insan(insan,yas,gozRengi){
+            this.insan_ismi=isim;
+            this.insan_yasi=yas;
+            this.insan_gozRengi=gozRengi;
+            this.isimDegistir=function(yeni_isim){
+                this.insan_ismi=yeni_isim;
+            }
+            this.dogumYili=dogumYiliHesapla;
+        }
+        function dogumYiliHesapla(){
+            return 2023 - this.insan_yasi;
+        }
+        var i1= new insan("Ahmet", 58, "BORDO");
+        document.write(i1.insan_ismi);
+        i1.isimDegistir("OSMAN");
+        document.write("<br>"+i1.insan_ismi);
+        document.write("<br>"+i1.insan_yasi);
+        document.write("<br>"+i1.dogumYili());
+        */
+    </script>
+</body>
+</html>
