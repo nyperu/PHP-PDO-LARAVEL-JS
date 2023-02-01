@@ -1,10 +1,10 @@
 <?php
+
 namespace App\Http\Controllers;
-use DB;
-use Illuminate\Support\Facades\Route;
+
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Http\Controllers;
+
 //Route::get('/', 'HomeController@index');
 //yukarıdakini görünce aşağıya benzetmelisin çünkü laravel sürümü yeni.
 //Route::get('/checking', '\App\Http\Controllers\HomeController@index');
@@ -66,9 +66,7 @@ class PostsController extends controller
      */
     public function edit($id)
     {
-        $updating=DB::update('update posts set title="Güncellenen" where id=?',[$id]);
-        $results=DB::select('select * from posts where id = ?' ,[$id]);
-
+        //
     }
 
     /**
