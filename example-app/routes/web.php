@@ -4,20 +4,28 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 use App\Models\Post;
-
+use App\Models\category;
+use App\Models\User;
 Route::get('/',function(){
-    return view('blog\posts',[
-        'posts'=>Post::all()
+
+
+    return view('posts',[
+        'posts'=>Post::latest('updated_at','author')->with('category')->get()
     ]);
 });
 Route::get('posts/{post:slug}',function(Post $post){
-    return view('blog\post',[
-        'post'=> ($post)
+    return view('post',[
+        'post'=> $post
     ]);
 });
-Route::get('categories/{category}',function(Category $category){
-    return view('blog\posts',[
+Route::get('categories/{category:slug}',function(category $category){
+    return view('posts',[
         'posts'=>$category->posts
+    ]);
+});
+Route::get('authors/{author:username}',function(User $author){
+    return view('blog\posts',[
+        'posts'=>$author->posts
     ]);
 });
 /*
