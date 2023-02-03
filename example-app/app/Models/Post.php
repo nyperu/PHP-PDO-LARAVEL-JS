@@ -9,6 +9,19 @@ class Post extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
+    public function scopeFilter($query, array $filters){ //Post::newQuery()->filter()
+
+        $query->when($filters['search']??false,fn ($query, $search)=>
+        $query->where('title','like','%'. request('search'). '%')
+            ->orWhere('body','like','%'. request('search'). '%')
+
+        );
+
+
+
+
+    }
     public function category(){//bütünlüğü sağlıyor.
         return $this->belongsTo(category::class);
         //hasOne, hasMany, belongsTo, belongsToMany

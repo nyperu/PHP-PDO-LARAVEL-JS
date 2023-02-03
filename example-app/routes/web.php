@@ -6,26 +6,20 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\category;
 use App\Models\User;
-Route::get('/',function(){
-
-
-    return view('posts',[
-        'posts'=>Post::latest('updated_at','author')->with('category')->get()
-    ]);
-});
-Route::get('posts/{post:slug}',function(Post $post){
-    return view('post',[
-        'post'=> $post
-    ]);
-});
+use App\Http\Controllers\PostController;
+Route::get('/',[PostController::class,'index']);
+Route::get('posts/{post:slug}',[PostController::class,'show']);
 Route::get('categories/{category:slug}',function(category $category){
     return view('posts',[
-        'posts'=>$category->posts
+        'posts'=>$category->posts,
+        'categories'=>category::all(),
+        'currentCategory'=>$category
     ]);
 });
 Route::get('authors/{author:username}',function(User $author){
     return view('blog\posts',[
-        'posts'=>$author->posts
+        'posts'=>$author->posts,
+        'categories'=>category::all()
     ]);
 });
 /*
