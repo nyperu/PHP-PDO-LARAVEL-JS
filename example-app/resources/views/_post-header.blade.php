@@ -4,7 +4,7 @@
         Latest <span class="text-blue-500">Laravel From Scratch</span> News
     </h1>
 
-    <h2 class="inline-flex mt-2">By Lary Laracore <img src="./images/lary-head.svg"
+    <h2 class="inline-flex mt-2">By Lary Laracore <img src="/images/lary-head.svg"
                                                        alt="Head of Lary the mascot"></h2>
 
     <p class="text-sm mt-14">
@@ -21,7 +21,7 @@
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
             <div x-data="{show:false}">
                 <button @click="show=! show" class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold " style="display: inline-flex">
-                    {{isset($currentCategory)?ucwords($currentCategory->name) :'categories'}}
+                    {{isset($currentCategory)?ucwords($currentCategory->name).' kategorisi' :'categories'}}
 
                     <svg class="transform -rotate-90 absolute pointer-events-none" style="right: 12px;" width="22"
                          height="22" viewBox="0 0 22 22">
@@ -35,7 +35,7 @@
                 </button>
                 <div x-show="show" class="py-2 absolute bg-gray-100 w-full mt-2 pl-3 rounded-xl z-50" style="display:none">
                     @foreach($categories as $category)
-                        <a href="/categories/{{$category->slug}}"  class="block text-left paddin-left:3px text-xs leading-5 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:text-white">{{$category->name}}</a>
+                        <a href="?category={{$category->slug}}"  class="block text-left paddin-left:3px text-xs leading-5 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:text-white">{{$category->name}}</a>
                     @endforeach
                 </div>
             </div>
@@ -66,9 +66,16 @@
         <!-- Search -->
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl px-3 py-2">
             <form method="GET" action="#">
-                <input type="text" name="search" placeholder="{{request('search')}}"
-                       class="bg-transparent placeholder-black font-semibold text-sm
+                @if(request('search'))
+                    <input type="text" name="search" placeholder="{{request('search')}}"
+                           class="bg-transparent placeholder-black font-semibold text-sm
                        value="{{request('search')}}">
+                @else
+                    <input type="text" name="search" placeholder="Buradan arama yapınız."
+                           class="bg-transparent placeholder-black font-semibold text-sm">
+                @endif
+
+
             </form>
         </div>
     </div>

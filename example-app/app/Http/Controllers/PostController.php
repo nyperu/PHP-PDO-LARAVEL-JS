@@ -7,16 +7,19 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
+
 class PostController extends Controller
 {
     public function  index(){
 
         $posts=Post::latest();
 
-        if(request('search')){
+        if(request('search') || request('category')){
             return view('posts',[
-                'posts'=>Post::latest()->filter(request(['search']))->get(),
-                'categories'=>category::all()
+                'posts'=>Post::latest()->filter(request(['search','category']))->get(),
+                'categories'=>category::all(),
+                'currentCategory' => category::firstWhere('slug',request('category'))
+
             ]);
         }
         return view('posts',[

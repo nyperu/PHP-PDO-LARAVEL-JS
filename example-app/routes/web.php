@@ -9,19 +9,21 @@ use App\Models\User;
 use App\Http\Controllers\PostController;
 Route::get('/',[PostController::class,'index']);
 Route::get('posts/{post:slug}',[PostController::class,'show']);
-Route::get('categories/{category:slug}',function(category $category){
-    return view('posts',[
-        'posts'=>$category->posts,
-        'categories'=>category::all(),
-        'currentCategory'=>$category
-    ]);
-});
+
 Route::get('authors/{author:username}',function(User $author){
     return view('blog\posts',[
         'posts'=>$author->posts,
         'categories'=>category::all()
     ]);
 });
+
+//Route::get('categories/{category:slug}',function(category $category){
+//    return view('posts',[
+//        'posts'=>$category->posts,
+//        'categories'=>category::all(),
+//        'currentCategory'=>$category
+//    ]);
+//})->name('category');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
