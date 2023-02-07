@@ -13,11 +13,11 @@ class Post extends Model
     public function scopeFilter($query, array $filters){ //Post::newQuery()->filter()
 
         $query->when($filters['search']??false,fn ($query, $search)=>
-        $query
-            ->where('title','like','%'. request('search'). '%')
+        $query->where(fn($query)=>
+            $query->where('title','like','%'. request('search'). '%')
             ->orWhere('body','like','%'. request('search'). '%')
 
-        );
+        ));
         $query->when($filters['category']??false,fn ($query, $category)=>
         $query
             ->whereHas('category',fn($query)
@@ -28,6 +28,12 @@ class Post extends Model
 //            $query->from('categories')
 //            ->whereColumn('categories.id','posts.category_id')
 //            ->where('categories.slug',$category))
+        );
+        $query->when($filters['authors']??false,fn ($query, $author)=>
+        $query
+            ->whereHas('author',fn($query)
+            =>$query->where('username',$author)
+            )
         );
     }
     public function category(){//bütünlüğü sağlıyor.

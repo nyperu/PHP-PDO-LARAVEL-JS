@@ -19,7 +19,7 @@
 
                 <div class="mt-4">
                     <h1 class="text-3xl">
-                        <a href="?category={{$post->category->slug}}">{{$post->category->name}}</a>
+                        <a href="/?category={{$post->category->slug}}">{{$post->category->name}}</a>
                     </h1>
 
                     <span class="mt-2 block text-gray-400 text-xs">
@@ -40,9 +40,10 @@
 
             <footer class="flex justify-between items-center mt-8">
                 <div class="flex items-center text-sm">
-                    <img src="./images/lary-avatar.svg" alt="Lary avatar">
+                    <img src="/images/lary-avatar.svg" alt="Lary avatar">
                     <div class="ml-3">
-                        <h5 class="font-bold">{{$post->author->name}}</h5>
+                        <h5 class="font-bold">
+                            <a href="/?authors={{$post->author->username}}"> {{$post->author->name}}</a></h5>
                         <h6>Mascot at Laracasts</h6>
                     </div>
                 </div>

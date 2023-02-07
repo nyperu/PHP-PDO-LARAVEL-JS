@@ -25,13 +25,14 @@
                         <x-post-card :post="$post"/>
 
                     @endforeach
-                    @endif
+
 
                 </div>
-
-            @else
-                <script> alert("HİÇBİR POST YOK!");</script>
             @endif
+            {{$posts->links()}}
+        @else
+            <script> alert("HİÇBİR POST YOK!");</script>
+        @endif
 
     </main>
 

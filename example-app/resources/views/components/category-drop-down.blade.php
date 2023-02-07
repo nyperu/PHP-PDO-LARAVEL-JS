@@ -12,9 +12,12 @@
             </g>
         </svg>
     </button>
+
+
+
     <div x-show="show" class="py-2 absolute bg-gray-100 w-full mt-2 pl-3 rounded-xl z-50" style="display:none">
         @foreach($categories as $category)
-            <a href="?category={{$category->slug}}"  class="block text-left paddin-left:3px text-xs leading-5 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:text-white">{{$category->name}}</a>
+            <a href="?category={{$category->slug}}&{{ http_build_query(request()->except('category','page'))}}"  class="block text-left paddin-left:3px text-xs leading-5 hover:bg-gray-300 focus:bg-gray-300 hover:text-white focus:text-white">{{$category->name}}</a>
         @endforeach
     </div>
 </div>

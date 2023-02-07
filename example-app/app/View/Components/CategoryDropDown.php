@@ -27,6 +27,7 @@ class CategoryDropDown extends Component
         return view('components.category-drop-down',[
             'categories'=>category::all(),
             'currentCategory' => category::firstWhere('slug',request('category'))
+
         ]);
     }
 }
