@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->id()->unique();
+            $table->id();
             $table->foreignID('user_id')->constrained()->cascadeOnDelete();
             $table->foreignID('category_id');
             $table->string('slug')->unique();
