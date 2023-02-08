@@ -22,10 +22,10 @@ class PostFactory extends Factory
         return [
             'user_id'=>User::Factory(),
             'category_id'=>category::factory(),
-            'title'=>$this->faker->sentence,
-            'slug'=>$this->faker->slug,
-            'excerpt'=>$this->faker->sentence,
-            'body'=>$this->faker->paragraph,
+            'title'=>$this->faker->sentence(),
+            'slug'=>$this->faker->slug(),
+            'excerpt'=>$this->faker->sentence(),
+            'body'=>$this->faker->paragraph(),
 
         ];
     }

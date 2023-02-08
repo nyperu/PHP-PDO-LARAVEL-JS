@@ -57,6 +57,16 @@
 
                 </div>
             </div>
+{{--            COMMENT SECTION OLACAK                --}}
+            <section class="col-span-8 col-start-5 space-y-6 mt-10">
+
+                @foreach($post->comments as $comment)
+
+                    <x-posts-comment :comment="$comment"/>
+
+                @endforeach
+
+            </section>
         </article>
     </main>
 
