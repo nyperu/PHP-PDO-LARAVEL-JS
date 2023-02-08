@@ -7,9 +7,20 @@ use App\Models\Post;
 use App\Models\category;
 use App\Models\User;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SessionsContoller;
 Route::get('/',[PostController::class,'index']);
+
 Route::get('posts/{post:slug}',[PostController::class,'show']);
 
+
+Route::get('register',[RegisterController::class,'create'])->middleware('guest');
+Route::post('register',[RegisterController::class,'store'])->middleware('guest');
+
+Route::get('login',[SessionsContoller::class,'create'])->middleware('guest');
+Route::post('sessions',[SessionsContoller::class,'store'])->middleware('guest');
+
+Route::post('logout',[SessionsContoller::class,'destroy'])->middleware('auth');
 
 
 //Route::get('categories/{category:slug}',function(category $category){
