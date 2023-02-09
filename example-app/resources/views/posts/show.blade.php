@@ -58,7 +58,11 @@
                 </div>
             </div>
 {{--            COMMENT SECTION OLACAK                --}}
+
             <section class="col-span-8 col-start-5 space-y-6 mt-10">
+
+              @include('posts._add-comment-form')
+
 
                 @foreach($post->comments as $comment)
 
@@ -67,6 +71,7 @@
                 @endforeach
 
             </section>
+
         </article>
     </main>
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\Newsletter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -9,10 +10,28 @@ use App\Models\User;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsContoller;
+use App\Http\Controllers\PostCommentController;
+use Illuminate\Validation\ValidationException;
+
+Route::post('/newsletter',function(Newsletter $newsletter) {
+    request()->validate(['email'=>'required|email']);
+    try{
+        $newsletter->subscribe(\request('email'));
+    }catch (\Exception $e){
+        throw ValidationException::withMessages([
+            'email'=>'Bu email sistemimizde kayıtlı olabilir.']);
+    }
+
+    return redirect('/')->with(
+        'success','You are now signed up for our newsletter'
+    );
+});
+
+
 Route::get('/',[PostController::class,'index']);
 
 Route::get('posts/{post:slug}',[PostController::class,'show']);
-
+Route::post('posts/{post:slug}/comments',[PostCommentController::class,'store']);
 
 Route::get('register',[RegisterController::class,'create'])->middleware('guest');
 Route::post('register',[RegisterController::class,'store'])->middleware('guest');
@@ -21,6 +40,8 @@ Route::get('login',[SessionsContoller::class,'create'])->middleware('guest');
 Route::post('sessions',[SessionsContoller::class,'store'])->middleware('guest');
 
 Route::post('logout',[SessionsContoller::class,'destroy'])->middleware('auth');
+
+Route::get('admin/posts/create',[PostController::class,'create'])->middleware('admin');
 
 
 //Route::get('categories/{category:slug}',function(category $category){
