@@ -16,10 +16,16 @@ class AdminsOnly
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->username!='nyperu'){
+        if(isset(auth()->user()->username)==false){
+            abort(403);
+            abort(Response::HTTP_FORBIDDEN);
+            return $next($request);
+        }
+        if( (auth()->user()->username!='sezer')){
             abort(403);
             abort(Response::HTTP_FORBIDDEN);
         }
         return $next($request);
+
     }
 }
