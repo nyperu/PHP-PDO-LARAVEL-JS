@@ -44,7 +44,7 @@ class PostController extends Controller
             'category_id'=>['required',Rule::exists('categories','id')]
         ]);
         $attributes['user_id']=auth()->id();
-        $attributes['thumbnail']=Storage::disk('local')->put( 'public',\request('thumbnail'));
+        $attributes['thumbnail']=Storage::disk('local')->put( 'thumbnails',\request('thumbnail'));
 
         Post::create($attributes);
         return redirect("/");
